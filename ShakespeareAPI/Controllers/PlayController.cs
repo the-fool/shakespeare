@@ -15,12 +15,12 @@ namespace ShakespeareAPI.Controllers {
         }
 
         [HttpGet]
-        public IQueryable<Play> GetAll () {
-            return repository.GetAll();
+        public ActionResult<List<Play>> GetAll () {
+            return repository.GetAll().ToList();
         }
 
         [HttpGet ("{id}")]
-        [ProducesResponseType (200, Type = typeof (Play))]
+        [ProducesResponseType (200)]
         [ProducesResponseType (404)]
         public ActionResult<Play> GetById(int id) {
             if (!repository.TryGetPlay(id, out var play)) {
