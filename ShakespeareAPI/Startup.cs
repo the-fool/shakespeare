@@ -10,8 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ShakespeareAPI.Models;
 
-namespace API
+namespace ShakespeareAPI
 {
     public class Startup
     {
