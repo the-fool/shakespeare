@@ -23,10 +23,10 @@ namespace ShakespeareAPI {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
-            services.AddTransient<IPlayRepository, FakePlayRepository> ();
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext> (options =>
                 options.UseNpgsql(Configuration.GetConnectionString ("ApplicationDbContext")));
+            services.AddTransient<IPlayRepository, PlayRepository> ();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
