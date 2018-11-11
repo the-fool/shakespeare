@@ -5,5 +5,6 @@ namespace ShakespeareAPI.Models {
         public ApplicationDbContext (DbContextOptions<ApplicationDbContext> options) : base (options) { }
 
         public DbSet<Play> Plays { get; set; }
+        public DbSet<Line> Lines { get; set; }
     }
 }

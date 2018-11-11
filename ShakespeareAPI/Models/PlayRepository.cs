@@ -19,7 +19,7 @@ namespace ShakespeareAPI.Models
         public bool TryGetPlay(int id, out Play play)
         {
             var x = context.Plays
-                .Where(p => p.ID == id)
+                .Where(p => p.PlayID == id)
                 .FirstOrDefault();
             if (x != null)
             {

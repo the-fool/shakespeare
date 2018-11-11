@@ -16,9 +16,9 @@ namespace ShakespeareAPI.Models
 
             var plays = new Play[]
             {
-                new Play{Name="Hamlet"},
-                new Play{Name="Macbeth"},
-                new Play{Name="All's Well that Ends Well"}
+                new Play{Name="Hamlet", Genre=Genre.Tragedy},
+                new Play{Name="Macbeth", Genre=Genre.Tragedy},
+                new Play{Name="All's Well that Ends Well", Genre=Genre.Comedy}
 
             };
 

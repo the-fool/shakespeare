@@ -9,8 +9,8 @@ using ShakespeareAPI.Models;
 namespace ShakespeareAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181104235737_initial")]
-    partial class initial
+    [Migration("20181111004502_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,16 +20,40 @@ namespace ShakespeareAPI.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("ShakespeareAPI.Models.Line", b =>
+                {
+                    b.Property<int>("LineID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("PlayID");
+
+                    b.HasKey("LineID");
+
+                    b.HasIndex("PlayID");
+
+                    b.ToTable("Lines");
+                });
+
             modelBuilder.Entity("ShakespeareAPI.Models.Play", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("PlayID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Genre");
 
                     b.Property<string>("Name");
 
-                    b.HasKey("ID");
+                    b.HasKey("PlayID");
 
                     b.ToTable("Plays");
+                });
+
+            modelBuilder.Entity("ShakespeareAPI.Models.Line", b =>
+                {
+                    b.HasOne("ShakespeareAPI.Models.Play", "Play")
+                        .WithMany()
+                        .HasForeignKey("PlayID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

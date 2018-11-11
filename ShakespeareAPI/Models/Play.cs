@@ -1,8 +1,14 @@
-namespace ShakespeareAPI.Models
-{
-    public class Play
-    {
-      public int ID { get; set; }
-      public string Name { get; set; }   
-    }
+namespace ShakespeareAPI.Models {
+
+  public enum Genre
+  {
+    Tragedy, History, Comedy, Unusual
+  }
+
+  public class Play {
+    public int PlayID { get; set; }
+    public string Name { get; set; }
+
+    public Genre Genre { get; set; }
+  }
 }
