@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CsvHelper;
 namespace ShakespeareAPI.Models {
     public class CsvIngester {
@@ -22,9 +23,20 @@ namespace ShakespeareAPI.Models {
 
             using (TextReader fileReader = File.OpenText ("models/Shakespeare_data.csv")) {
                 var csv = new CsvReader (fileReader);
-                csv.Read ();
-                var record = csv.GetRecord<ShakespeareRow> ();
-                Console.WriteLine (record.ToString());
+                var records = csv.GetRecords<ShakespeareRow> ();
+                var plays = records.Select (r => r.Play).Distinct ();
+
+                var oldPlays = context.Set<Play> ();
+                context.Plays.RemoveRange (oldPlays);
+                context.SaveChanges();
+                foreach (var p in plays) {
+                    context.Plays.Add (new Play () {
+                        Name = p,
+                        Genre=Genre.Unusual
+                    });
+
+                }
+                context.SaveChanges();
             }
         }
 
