@@ -12,43 +12,43 @@ using ShakespeareAPI.Models;
 
 namespace ShakespeareAPI {
     public class Program {
-        public static int Main (string[] args) {
+        public static int Main(string[] args) {
             foreach (var arg in args) {
-                Console.WriteLine (arg);
+                Console.WriteLine(arg);
             }
-            var host = CreateWebHostBuilder (args).Build ();
+            var host = CreateWebHostBuilder(args).Build();
 
-            using (var scope = host.Services.CreateScope ()) {
+            using(var scope = host.Services.CreateScope()) {
                 var services = scope.ServiceProvider;
 
-                var context = services.GetRequiredService<ApplicationDbContext> ();
-                var logger = services.GetRequiredService<ILogger<Program>> ();
+                var context = services.GetRequiredService<ApplicationDbContext>();
+                var logger = services.GetRequiredService<ILogger<Program>>();
 
                 try {
-                    DbInitializer.Initialize (context);
+                    DbInitializer.Initialize(context);
                 } catch (Exception ex) {
-                    logger.LogError (ex, "An error occurred creating the DB.");
+                    logger.LogError(ex, "An error occurred creating the DB.");
                 }
 
                 if (args.Length > 0) {
                     if (args[0] == "csv") {
                         try {
-                            CsvIngester.Ingest (context);
+                            CsvIngester.Ingest(context);
                             return 0;
                         } catch (Exception ex) {
-                            logger.LogError (ex, "An error occurred ingesting CSV");
+                            logger.LogError(ex, "An error occurred ingesting CSV");
                             return 1;
                         }
                     }
                 }
             }
 
-            host.Run ();
+            host.Run();
             return 1;
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder (string[] args) =>
-            WebHost.CreateDefaultBuilder (args)
-            .UseStartup<Startup> ();
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+            .UseStartup<Startup>();
     }
 }

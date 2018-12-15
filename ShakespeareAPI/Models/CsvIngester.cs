@@ -17,22 +17,28 @@ namespace ShakespeareAPI.Models {
             }
         }
 
+        private class WorkGenreRow {
+            public string Title { get; set; }
+            public Genre Genre { get; set; }
+        }
+
         public static void Ingest(ApplicationDbContext context) {
 
             var result = new List<string>();
 
-            using(TextReader fileReader = File.OpenText("models/Shakespeare_data.csv")) {
-                var csv = new CsvReader(fileReader);
-                var records = csv.GetRecords<ShakespeareRow>();
-                var plays = records.Select(r => r.Play).Distinct();
+            using(TextReader worksReader = File.OpenText("models/works_genre.csv"))
+            using(TextReader linesReader = File.OpenText("models/Shakespeare_data.csv")) {
+                var worksCsv = new CsvReader(worksReader);
+                var csv = new CsvReader(linesReader);
+                var works = worksCsv.GetRecords<WorkGenreRow>();
 
                 var oldPlays = context.Set<Play>();
                 context.Plays.RemoveRange(oldPlays);
                 context.SaveChanges();
-                foreach (var p in plays) {
+                foreach (var w in works) {
                     var play = new Play() {
-                        Name = p,
-                        Genre = Genre.Unusual,
+                        Name = w.Title,
+                        Genre = w.Genre,
                     };
                     context.Plays.Add(play);
 

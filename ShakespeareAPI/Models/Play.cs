@@ -2,7 +2,7 @@ namespace ShakespeareAPI.Models {
 
   public enum Genre
   {
-    Tragedy, History, Comedy, Unusual
+    Tragedy, History, Comedy, Poem, Sonnet, Unusual
   }
 
   public class Play {
