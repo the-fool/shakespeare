@@ -21,7 +21,7 @@ namespace ShakespeareAPI {
             using(var scope = host.Services.CreateScope()) {
                 var services = scope.ServiceProvider;
 
-                var context = services.GetRequiredService<ApplicationDbContext>();
+                var context = services.GetRequiredService<ApiDbContext>();
                 var logger = services.GetRequiredService<ILogger<Program>>();
 
                 try {

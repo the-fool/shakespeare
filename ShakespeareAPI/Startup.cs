@@ -15,27 +15,27 @@ using ShakespeareAPI.Models;
 
 namespace ShakespeareAPI {
     public class Startup {
-        public Startup (IConfiguration configuration) {
+        public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices (IServiceCollection services) {
-            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
-            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext> (options =>
-                options.UseNpgsql(Configuration.GetConnectionString ("ApplicationDbContext")));
-            services.AddTransient<IPlayRepository, PlayRepository> ();
+        public void ConfigureServices(IServiceCollection services) {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddEntityFrameworkNpgsql().AddDbContext<ApiDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("ApiDbContext")));
+            services.AddScoped<IWorkRepository, WorkRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
 
-            app.UseDeveloperExceptionPage ();
-            app.UseStatusCodePages ();
-            app.UseStaticFiles ();
-            app.UseMvc (routes => {
+            app.UseDeveloperExceptionPage();
+            app.UseStatusCodePages();
+            app.UseStaticFiles();
+            app.UseMvc(routes => {
 
             });
         }
