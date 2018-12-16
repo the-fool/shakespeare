@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ShakespeareAPI.Models;
+using ShakespeareAPI.Services;
 
 namespace ShakespeareAPI {
     public class Startup {
@@ -26,7 +27,7 @@ namespace ShakespeareAPI {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddEntityFrameworkNpgsql().AddDbContext<ApiDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("ApiDbContext")));
-            services.AddScoped<IWorkRepository, WorkRepository>();
+            services.AddScoped<IWorkService, WorkService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

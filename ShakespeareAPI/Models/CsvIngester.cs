@@ -22,25 +22,25 @@ namespace ShakespeareAPI.Models {
             public Genre Genre { get; set; }
         }
 
-        public static void Ingest(ApplicationDbContext context) {
+        public static void Ingest(ApiDbContext context) {
 
             var result = new List<string>();
-
-            using(TextReader worksReader = File.OpenText("models/works_genre.csv"))
-            using(TextReader linesReader = File.OpenText("models/Shakespeare_data.csv")) {
+            var rootFixtureDir = "models/shakespeare_data/csv";
+            using(TextReader worksReader = File.OpenText($"{rootFixtureDir}/works.csv"))
+            using(TextReader linesReader = File.OpenText($"{rootFixtureDir}/paragraphs.csv")) {
                 var worksCsv = new CsvReader(worksReader);
                 var csv = new CsvReader(linesReader);
                 var works = worksCsv.GetRecords<WorkGenreRow>();
 
-                var oldPlays = context.Set<Play>();
-                context.Plays.RemoveRange(oldPlays);
+                var oldPlays = context.Set<Work>();
+                context.Works.RemoveRange(oldPlays);
                 context.SaveChanges();
                 foreach (var w in works) {
-                    var play = new Play() {
-                        Name = w.Title,
+                    var play = new Work() {
+                        Title = w.Title,
                         Genre = w.Genre,
                     };
-                    context.Plays.Add(play);
+                    context.Works.Add(play);
 
                 }
                 context.SaveChanges();
