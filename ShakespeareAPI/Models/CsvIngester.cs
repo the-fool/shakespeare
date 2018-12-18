@@ -12,6 +12,14 @@ namespace ShakespeareAPI.Models {
             public string date { get; set; }
             public string genre { get; set; }
         }
+
+        private class SceneRow {
+            public int id { get; set; }
+            public int act { get; set; }
+            public int scene { get; set; }
+            public string description { get; set; }
+            public int work_id { get; set; }
+        }
         private class ShakespeareRow {
             public int paragraph_num { get; set; }
             public string text { get; set; }
@@ -54,6 +62,24 @@ namespace ShakespeareAPI.Models {
                         Genre = genre,
                     };
                     context.Works.Add(work);
+                }
+                context.SaveChanges();
+            }
+
+            using(TextReader reader = File.OpenText($"{rootFixtureDir}/scenes.csv")) {
+                var csv = new CsvReader(reader);
+                var rows = csv.GetRecords<SceneRow>();
+
+                foreach (var r in rows) {
+                    var scene = new Scene() {
+                        Id = r.id,
+                        Order = r.scene,
+                        Act = r.act,
+                        Description = r.description,
+                        WorkId = r.work_id
+                    };
+
+                    context.Scenes.Add(scene);
                 }
                 context.SaveChanges();
             }
