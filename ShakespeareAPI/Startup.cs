@@ -28,6 +28,7 @@ namespace ShakespeareAPI {
             services.AddEntityFrameworkNpgsql().AddDbContext<ApiDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("ApiDbContext")));
             services.AddScoped<IWorkService, WorkService>();
+            services.AddScoped<IParagraphService, ParagraphService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
