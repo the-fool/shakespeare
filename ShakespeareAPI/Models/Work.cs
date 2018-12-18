@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ShakespeareAPI.Models {
 
     public enum Genre {
@@ -19,5 +21,7 @@ namespace ShakespeareAPI.Models {
         public string Date { get; set; }
 
         public Genre Genre { get; set; }
+
+        public List<Scene> Scenes { get; set; }
     }
 }

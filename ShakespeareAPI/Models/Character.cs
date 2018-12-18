@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ShakespeareAPI.Models
 {
     public class Character
@@ -6,5 +8,7 @@ namespace ShakespeareAPI.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Abbreviation { get; set; }
+
+        public List<Paragraph> Paragraphs { get; set; }
     }
 }
