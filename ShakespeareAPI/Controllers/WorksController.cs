@@ -8,10 +8,10 @@ using ShakespeareAPI.Models;
 namespace ShakespeareAPI.Controllers {
     [Route ("api/[controller]")]
     [ApiController]
-    public class WorkController : ControllerBase {
+    public class WorksController : ControllerBase {
         private readonly IWorkService workService;
 
-        public WorkController (IWorkService svc) {
+        public WorksController (IWorkService svc) {
             workService = svc;
         }
 
