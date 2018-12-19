@@ -3,6 +3,7 @@ version: "3"
 volumes:
   local_postgres_data: {}
 
+
 services: 
   web:
     build: ./backend
@@ -11,10 +12,12 @@ services:
       - "5001:5001"
     depends_on:
       - db
-    environment:
-      ASPNETCORE_URLS: "http://*:5000"
     volumes:
       - ./backend:/app
+      - /app/ShakespeareAPI/bin
+      - /app/ShakespeareAPI/obj
+      - /app/ShakespeareAPI.Tests/bin
+      - /app/ShakespeareAPI.Tests/obj
   
   db:
     image: postgres:11.1
