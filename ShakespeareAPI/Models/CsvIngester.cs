@@ -96,23 +96,6 @@ namespace ShakespeareAPI.Models {
                 context.SaveChanges();
             }
             
-            using(TextReader reader = File.OpenText($"{rootFixtureDir}/characters.csv")) {
-                var csv = new CsvReader(reader);
-                var rows = csv.GetRecords<CharacterRow>();
-
-                foreach (var r in rows) {
-                    var character = new Character() {
-                        Id = r.id,
-                        Name = r.name,
-                        Abbreviation = r.abbrev,
-                        Description = r.description,
-                    };
-
-                    context.Characters.Add(character);
-                }
-                context.SaveChanges();
-            }
-
             using(TextReader reader = File.OpenText($"{rootFixtureDir}/paragraphs.csv")) {
                 var csv = new CsvReader(reader);
                 var rows = csv.GetRecords<ParagraphRow>();
