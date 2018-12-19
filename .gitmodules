@@ -1,3 +1,3 @@
-[submodule "ShakespeareAPI/Models/shakespeare_data"]
+[submodule "backend/ShakespeareAPI/Models/shakespeare_data"]
 	path = backend/ShakespeareAPI/Models/shakespeare_data
 	url = https://github.com/the-fool/shakespeare_data
