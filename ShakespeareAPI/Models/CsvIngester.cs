@@ -95,7 +95,7 @@ namespace ShakespeareAPI.Models {
                 }
                 context.SaveChanges();
             }
-
+            
             using(TextReader reader = File.OpenText($"{rootFixtureDir}/characters.csv")) {
                 var csv = new CsvReader(reader);
                 var rows = csv.GetRecords<CharacterRow>();
@@ -116,7 +116,7 @@ namespace ShakespeareAPI.Models {
             using(TextReader reader = File.OpenText($"{rootFixtureDir}/paragraphs.csv")) {
                 var csv = new CsvReader(reader);
                 var rows = csv.GetRecords<ParagraphRow>();
-
+                var count = 1;
                 foreach (var r in rows) {
                     var x = new Paragraph() {
                         Id = r.id,
@@ -127,6 +127,10 @@ namespace ShakespeareAPI.Models {
                     };
 
                     context.Paragraphs.Add(x);
+                    // batch the inserts
+                    if (count % 1000 == 0)
+                        context.SaveChanges();
+                    count++;
                 }
                 context.SaveChanges();
             }
