@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CsvHelper;
+using Microsoft.EntityFrameworkCore;
+
 namespace ShakespeareAPI.Models {
     public class CsvIngester {
         private class WorksRow {
@@ -20,35 +22,28 @@ namespace ShakespeareAPI.Models {
             public string description { get; set; }
             public int work_id { get; set; }
         }
-        private class ShakespeareRow {
+
+        private class ParagraphRow {
+            public int id { get; set; }
             public int paragraph_num { get; set; }
             public string text { get; set; }
-            public string character_name { get; set; }
-            public string character_abbrev { get; set; }
-            public string character_description { get; set; }
-            public int scene_act { get; set; }
-            public int scene_scene { get; set; }
-            public string scene_description { get; set; }
-            public string work_title { get; set; }
-            public string work_long_title { get; set; }
-            public string work_date { get; set; }
-            public string work_genre { get; set; }
+            public int character_id { get; set; }
+            public int scene_id { get; set; }
+        }
 
-            public override string ToString() {
-                return base.ToString() + ": " + work_title + ": " + text.Substring(0, 16);
-            }
+        private class CharacterRow {
+            public int id { get; set; }
+            public string name { get; set; }
+            public string abbrev { get; set; }
+            public string description { get; set; }
         }
 
         public static void Ingest(ApiDbContext context) {
+
             var rootFixtureDir = "models/shakespeare_data/csv";
             using(TextReader masterReader = File.OpenText($"{rootFixtureDir}/works.csv")) {
                 var csv = new CsvReader(masterReader);
                 var rows = csv.GetRecords<WorksRow>();
-
-                var oldWorks = context.Set<Work>();
-
-                context.Works.RemoveRange(oldWorks);
-                context.SaveChanges();
 
                 foreach (var r in rows) {
                     if (!Enum.TryParse<Genre>(r.genre, true, out var genre)) {
@@ -80,6 +75,58 @@ namespace ShakespeareAPI.Models {
                     };
 
                     context.Scenes.Add(scene);
+                }
+                context.SaveChanges();
+            }
+
+            using(TextReader reader = File.OpenText($"{rootFixtureDir}/characters.csv")) {
+                var csv = new CsvReader(reader);
+                var rows = csv.GetRecords<CharacterRow>();
+
+                foreach (var r in rows) {
+                    var character = new Character() {
+                        Id = r.id,
+                        Name = r.name,
+                        Abbreviation = r.abbrev,
+                        Description = r.description,
+                    };
+
+                    context.Characters.Add(character);
+                }
+                context.SaveChanges();
+            }
+
+            using(TextReader reader = File.OpenText($"{rootFixtureDir}/characters.csv")) {
+                var csv = new CsvReader(reader);
+                var rows = csv.GetRecords<CharacterRow>();
+
+                foreach (var r in rows) {
+                    var character = new Character() {
+                        Id = r.id,
+                        Name = r.name,
+                        Abbreviation = r.abbrev,
+                        Description = r.description,
+                    };
+
+                    context.Characters.Add(character);
+                }
+                context.SaveChanges();
+            }
+
+            using(TextReader reader = File.OpenText($"{rootFixtureDir}/paragraphs.csv")) {
+                var csv = new CsvReader(reader);
+                var rows = csv.GetRecords<ParagraphRow>();
+
+                foreach (var r in rows) {
+                    var x = new Paragraph() {
+                        Id = r.id,
+                        Text = r.text,
+                        Cardinality = r.paragraph_num,
+                        CharacterId = r.character_id,
+                        SceneId = r.scene_id,
+                    };
+
+                    context.Paragraphs.Add(x);
                 }
                 context.SaveChanges();
             }
