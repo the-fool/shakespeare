@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-run_cmd="dotnet run -p ShakespeareAPI"
+run_cmd="dotnet watch -p ShakespeareAPI run"
 
 dotnet restore
 

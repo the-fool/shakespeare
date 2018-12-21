@@ -9,7 +9,11 @@ namespace ShakespeareAPI.Services {
             context = ctx;
         }
 
-        public bool GetById(int id, out Paragraph paragraph) {
+        public IQueryable<Paragraph> GetAll() {
+            return context.Paragraphs;
+        }
+
+        public bool TryGetById(int id, out Paragraph paragraph) {
             var x = context.Paragraphs
                 .Where(p => p.Id == id)
                 .FirstOrDefault();

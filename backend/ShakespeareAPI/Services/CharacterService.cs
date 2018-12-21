@@ -1,31 +1,30 @@
 using System.Linq;
 using ShakespeareAPI.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace ShakespeareAPI.Services {
-    public class WorkService : IWorkService {
+    public class CharacterService : ICharacterService {
 
         private readonly ApiDbContext context;
 
-        public WorkService(ApiDbContext ctx) {
+        public CharacterService(ApiDbContext ctx) {
             context = ctx;
         }
 
-        public IQueryable<Work> GetAll() {
-            return context.Works;
+        public IQueryable<Character> GetAll() {
+            return context.Characters;
         }
 
-        public bool GetById(int id, out Work work)
+        public bool TryGetById(int id, out Character character)
         {
-            var x = context.Works
+            var x = context.Characters
                 .Where(p => p.Id == id)
                 .FirstOrDefault();
             if (x != null)
             {
-                work = x;
+                character = x;
                 return true;
             }
-            work = null;
+            character = null;
             return false;
         }
     }

@@ -1,9 +1,12 @@
+using System.Linq;
 using ShakespeareAPI.Models;
 
 namespace ShakespeareAPI.Services
 {
     public interface IParagraphService
     {
-        bool GetById(int id, out Paragraph paragraph);
+
+        IQueryable<Paragraph> GetAll(); 
+        bool TryGetById(int id, out Paragraph paragraph);
     }
 }

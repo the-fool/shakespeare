@@ -22,6 +22,6 @@ namespace ShakespeareAPI.Models {
 
         public Genre Genre { get; set; }
 
-        public List<Scene> Scenes { get; set; }
+        public IEnumerable<Scene> Scenes { get; set; }
     }
 }
