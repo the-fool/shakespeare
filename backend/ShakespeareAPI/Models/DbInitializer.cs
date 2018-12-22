@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace ShakespeareAPI.Models {
     public static class DbInitializer {
         public static void Initialize(ApiDbContext context) {
