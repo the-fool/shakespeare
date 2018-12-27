@@ -26,3 +26,10 @@ services:
       POSTGRES_USERNAME: postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
+  
+  client:
+    build: ./frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app
