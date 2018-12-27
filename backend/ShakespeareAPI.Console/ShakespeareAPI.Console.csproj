@@ -4,6 +4,10 @@
     <ProjectReference Include="..\ShakespeareAPI\ShakespeareAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="microsoft.aspnetcore" Version="2.2.0" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>

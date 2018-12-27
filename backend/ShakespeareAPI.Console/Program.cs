@@ -7,7 +7,12 @@ namespace ShakespeareAPI.Console
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var host = ShakespeareAPI.Program.CreateWebHostBuilder(args);
+
+            using(var scope = host.Services.CreateScope()) {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<ApiDbContext>; 
+            }
         }
     }
 }
