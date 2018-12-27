@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShakespeareAPI", "Shakespea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShakespeareAPI.Tests", "ShakespeareAPI.Tests\ShakespeareAPI.Tests.csproj", "{6F8911CE-78DA-4E2C-B132-A6FA7684AABF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShakespeareAPI.Console", "ShakespeareAPI.console\ShakespeareAPI.Console.csproj", "{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{6F8911CE-78DA-4E2C-B132-A6FA7684AABF}.Release|x64.Build.0 = Release|Any CPU
 		{6F8911CE-78DA-4E2C-B132-A6FA7684AABF}.Release|x86.ActiveCfg = Release|Any CPU
 		{6F8911CE-78DA-4E2C-B132-A6FA7684AABF}.Release|x86.Build.0 = Release|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Debug|x64.Build.0 = Debug|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Debug|x86.Build.0 = Debug|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Release|x64.ActiveCfg = Release|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Release|x64.Build.0 = Release|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Release|x86.ActiveCfg = Release|Any CPU
+		{33D26ED0-6332-4BD4-8AA5-9E781573EE7C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
