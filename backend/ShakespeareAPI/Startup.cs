@@ -24,7 +24,9 @@ namespace ShakespeareAPI {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors();
             services.AddEntityFrameworkNpgsql().AddDbContext<ApiDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("ApiDbContext")));
             services.AddScoped<IWorkService, WorkService>();
@@ -39,6 +41,12 @@ namespace ShakespeareAPI {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseCors(builder =>
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
             app.UseMvc(routes => {
 
             });
